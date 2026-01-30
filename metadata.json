@@ -1,0 +1,7 @@
+{
+  "name": "Little Bird Laundry",
+  "description": "A fresh, modern, and interactive web application for Little Bird Laundry services, featuring an automated cost calculator and an AI-powered stain-removal assistant.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
