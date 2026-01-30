@@ -3,11 +3,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Calculator from './components/Calculator';
-import ChatWidget from './components/ChatWidget';
 import Footer from './components/Footer';
 import WaterParticles from './components/WaterParticles';
 import { SERVICES, BUSINESS_INFO } from './constants';
-// Added missing MessageCircle icon import
 import { CheckCircle2, Waves, Wind, Sun, ArrowRight, X, Sparkles, ShieldCheck, MessageCircle } from 'lucide-react';
 import { ServiceItem } from './types';
 
@@ -79,7 +77,7 @@ const ServiceModal: React.FC<{ service: ServiceItem | null, onClose: () => void 
             <div className="bg-blue-50 rounded-2xl p-5 border border-blue-100">
               <div className="flex items-center gap-3 text-blue-700 mb-2">
                 <Sparkles size={18} />
-                <span className="text-xs font-black uppercase tracking-widest">Chirpy's Pro Tip</span>
+                <span className="text-xs font-black uppercase tracking-widest">Expert Care Tip</span>
               </div>
               <p className="text-xs text-blue-600/80 leading-relaxed font-medium">
                 To keep your {service.name.toLowerCase()} looking new, we recommend a cool-water wash and natural air drying. Avoid harsh bleaches!
@@ -108,7 +106,6 @@ const AnimatedServiceCard: React.FC<{ service: ServiceItem, index: number, onSel
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Gentle entry animation only on mount (scroll reveal)
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -232,17 +229,16 @@ const App: React.FC = () => {
 
       <ServiceModal service={selectedService} onClose={() => setSelectedService(null)} />
       <Footer />
-      <ChatWidget />
 
       {/* Persistent Floating WhatsApp */}
       <a 
         href={`https://wa.me/${BUSINESS_INFO.whatsapp}`}
         target="_blank"
-        className="fixed bottom-32 right-6 z-[90] bg-[#25D366] text-white p-4 rounded-full shadow-2xl floating-whatsapp hover:scale-110 transition-transform active:scale-95 flex items-center gap-2 group border-4 border-white/50"
+        className="fixed bottom-6 right-6 z-[90] bg-[#25D366] text-white p-4 rounded-full shadow-2xl floating-whatsapp hover:scale-110 transition-transform active:scale-95 flex items-center gap-2 group border-4 border-white/50"
       >
-        <MessageCircle size={24} fill="currentColor" />
-        <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 font-black whitespace-nowrap text-xs">
-          Help Line
+        <MessageCircle size={32} fill="currentColor" />
+        <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 font-black whitespace-nowrap text-sm ml-2">
+          Chat Live
         </span>
       </a>
     </div>
