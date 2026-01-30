@@ -72,7 +72,7 @@ const Footer: React.FC = () => {
         </div>
         
         <div className="pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400 font-medium uppercase tracking-widest">
-          <p>© 2024 Little Bird Laundry. All rights reserved.</p>
+          <p>© 2026 Little Bird Laundry. All rights reserved.</p>
           <div className="flex gap-8">
             <a href="#" className="hover:text-slate-600">Privacy Policy</a>
             <a href="#" className="hover:text-slate-600">Terms of Service</a>

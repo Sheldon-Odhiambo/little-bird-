@@ -1,20 +1,38 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# 🧺 Little Bird Laundry Company
 
-# Run and deploy your AI Studio app
+Little Bird Laundry Company is a modern laundry service brand focused on providing fresh, reliable, and convenient laundry solutions for individuals and families.
+Our mission is simple: Clean clothes. Happy lives.
 
-This contains everything you need to run your app locally.
+This project powers the Little Bird Laundry Company digital experience, combining clean design with smart functionality.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1kFowv61Kras5D_ECTKTaVYRIv5N0PSQ1
+🚀 Features
 
-## Run Locally
+Modern and responsive UI
 
-**Prerequisites:**  Node.js
+Fast performance with Vite
 
+Smart automation-ready features
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+Mobile-first experience
+
+Easy customization and scalability
+
+🛠️ Tech Stack
+
+React (TSX)
+
+Vite
+
+Node.js
+
+Tailwind CSS
+
+▶️ Run and Deploy the App
+
+This repository contains everything you need to run the app locally and deploy it.
+
+📦 Prerequisites
+
+Make sure you have the following installed:
+
+- Node.js (v18 or higher recommended)
