@@ -17,21 +17,20 @@ const Navbar: React.FC = () => {
         <div className="flex items-center gap-4 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
           {/* Replace src with your actual logo file path later */}
           <div className="relative">
-            <div className="w-12 h-12 bg-slate-100 rounded-xl overflow-hidden shadow-inner flex items-center justify-center border border-slate-200 group-hover:border-blue-200 transition-colors">
-              <img 
-                src="/logo.png" 
-                alt="Logo" 
-                className="w-full h-full object-contain"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = 'https://via.placeholder.com/150?text=LOGO';
-                }}
-              />
-            </div>
+                <div className="flex items-center justify-center h-12">
+  <img 
+    src="/assets/2.png" 
+    alt="Little Bird Laundry Logo" 
+    className="h-16 w-auto object-contain"
+  />
+</div>
+
+
           </div>
-          <div>
+          {/* <div>
             <h1 className="text-xl font-black text-slate-900 leading-none tracking-tighter uppercase">Little Bird</h1>
             <p className="text-[8px] uppercase tracking-[0.4em] text-blue-600 font-black mt-0.5">Luxe Laundry</p>
-          </div>
+          </div> */}
         </div>
         
         <div className="hidden lg:flex items-center gap-8 text-[10px] font-black uppercase tracking-widest text-slate-400">
