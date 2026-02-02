@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Sparkles, MessageCircle, Clock, Star, ShieldCheck, ChevronRight } from 'lucide-react';
+import { Sparkles, MessageCircle, Bird, ChevronRight, ShieldCheck } from 'lucide-react';
 import { BUSINESS_INFO } from '../constants';
 
 const Hero: React.FC = () => {
@@ -10,7 +10,7 @@ const Hero: React.FC = () => {
         <div className="space-y-8 reveal active">
           <div className="inline-flex items-center gap-3 px-5 py-2 bg-white/60 text-blue-700 rounded-full text-xs font-black border border-blue-100 shadow-sm backdrop-blur-sm">
             <Sparkles size={14} className="text-yellow-500" />
-            <span className="tracking-widest uppercase">Nairobi's Choice</span>
+            <span className="tracking-widest uppercase">Premium Care In Nairobi</span>
           </div>
           
           <div className="space-y-4">
@@ -19,7 +19,7 @@ const Hero: React.FC = () => {
               <span className="text-blue-600">Fresh.</span>
             </h1>
             <p className="text-xl text-slate-600 max-w-md leading-relaxed font-normal">
-              Experience sophisticated garment care. We combine advanced chemistry with artisan folding to keep you looking sharp.
+              Experience sophisticated garment care. We combine advanced eco-chemistry with artisan folding to keep you looking sharp.
             </p>
           </div>
           
@@ -65,25 +65,30 @@ const Hero: React.FC = () => {
               alt="Clean folded laundry" 
               className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105 brightness-90 contrast-110"
             />
-            {/* Heavier darkening overlay for text legibility */}
+            {/* Brand Quality Overlay */}
+            <div className="absolute top-8 right-8 bg-white/20 backdrop-blur-xl p-4 rounded-3xl border border-white/30 z-20 flex flex-col items-center gap-2 animate-in fade-in zoom-in duration-1000 delay-500">
+               <Bird size={28} className="text-white drop-shadow-lg" />
+               <div className="h-px w-8 bg-white/30" />
+               <ShieldCheck size={20} className="text-blue-400 drop-shadow-lg" />
+            </div>
+
             <div className="absolute inset-0 bg-slate-900/30 transition-opacity duration-500 group-hover:opacity-20" />
             <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent" />
             
             <div className="absolute bottom-8 left-8 text-white z-10">
                <h3 className="text-3xl font-black mb-1 drop-shadow-md">Spotless Result.</h3>
-               <p className="text-sm opacity-95 font-medium drop-shadow-md">Eco-friendly care for every fiber.</p>
+               <p className="text-sm opacity-95 font-medium drop-shadow-md">Professional care for every fiber.</p>
             </div>
           </div>
 
-          {/* Floating Badge */}
           <div className="absolute top-8 -left-8 z-20 bg-white/90 backdrop-blur-xl p-6 rounded-[2rem] shadow-2xl border border-white/50 animate-float hidden md:block">
              <div className="flex items-center gap-4">
                 <div className="bg-blue-600 p-3 rounded-2xl text-white shadow-lg">
-                   <Clock size={24} />
+                   <Bird size={24} />
                 </div>
                 <div>
                    <div className="text-lg font-black text-slate-900">{BUSINESS_INFO.hours.weekdays}</div>
-                   <div className="text-[9px] text-blue-500 font-black uppercase tracking-[0.2em]">Open Weekdays</div>
+                   <div className="text-[9px] text-blue-500 font-black uppercase tracking-[0.2em]">Quality Guaranteed</div>
                 </div>
              </div>
           </div>
