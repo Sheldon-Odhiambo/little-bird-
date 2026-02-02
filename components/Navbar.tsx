@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Bird, Phone, MessageSquare } from 'lucide-react';
+import { Bird, MessageSquare } from 'lucide-react';
 import { BUSINESS_INFO } from '../constants';
 
 const Navbar: React.FC = () => {
@@ -14,9 +14,19 @@ const Navbar: React.FC = () => {
   return (
     <nav className="sticky top-0 z-[100] w-full glass-nav px-6 py-4">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <div className="flex items-center gap-2 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-          <div className="bg-blue-600 p-2.5 rounded-xl text-white shadow-lg group-hover:rotate-12 transition-transform">
-            <Bird size={24} />
+        <div className="flex items-center gap-4 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+          {/* Replace src with your actual logo file path later */}
+          <div className="relative">
+            <div className="w-12 h-12 bg-slate-100 rounded-xl overflow-hidden shadow-inner flex items-center justify-center border border-slate-200 group-hover:border-blue-200 transition-colors">
+              <img 
+                src="/logo.png" 
+                alt="Logo" 
+                className="w-full h-full object-contain"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = 'https://via.placeholder.com/150?text=LOGO';
+                }}
+              />
+            </div>
           </div>
           <div>
             <h1 className="text-xl font-black text-slate-900 leading-none tracking-tighter uppercase">Little Bird</h1>
@@ -27,24 +37,26 @@ const Navbar: React.FC = () => {
         <div className="hidden lg:flex items-center gap-8 text-[10px] font-black uppercase tracking-widest text-slate-400">
           <button onClick={() => scrollTo('services')} className="hover:text-blue-600 transition-all hover:tracking-[0.15em] outline-none">Services</button>
           <button onClick={() => scrollTo('calculator')} className="hover:text-blue-600 transition-all hover:tracking-[0.15em] outline-none">Estimator</button>
-          <button onClick={() => scrollTo('contact')} className="hover:text-blue-600 transition-all hover:tracking-[0.15em] outline-none">Locate</button>
+          <button onClick={() => scrollTo('contact')} className="hover:text-blue-600 transition-all hover:tracking-[0.15em] outline-none">Contact</button>
         </div>
 
         <div className="flex items-center gap-5">
           <div className="hidden sm:flex flex-col items-end">
-             <div className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">Call Now</div>
+             <div className="flex items-center gap-1.5 text-[9px] text-blue-600 font-black uppercase tracking-widest">
+               <Bird size={10} />
+               <span>Official Partner</span>
+             </div>
              <a href={`tel:${BUSINESS_INFO.phone}`} className="text-md font-black text-slate-900 hover:text-blue-600 transition-colors">
                {BUSINESS_INFO.phone}
              </a>
           </div>
-          <a 
-            href={`https://wa.me/${BUSINESS_INFO.whatsapp}`}
-            target="_blank"
-            className="hidden sm:flex items-center gap-2.5 bg-blue-600 text-white px-6 py-3 rounded-xl text-xs font-black shadow-xl shadow-blue-100 hover:bg-slate-900 transition-all"
+          <button 
+            onClick={() => scrollTo('calculator')}
+            className="flex items-center gap-2.5 bg-blue-600 text-white px-6 py-3 rounded-xl text-xs font-black shadow-xl shadow-blue-100 hover:bg-slate-900 transition-all"
           >
             <MessageSquare size={16} fill="currentColor" />
             <span>PICKUP</span>
-          </a>
+          </button>
         </div>
       </div>
     </nav>
