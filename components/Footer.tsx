@@ -10,9 +10,14 @@ const Footer: React.FC = () => {
         <div className="grid md:grid-cols-4 gap-12 mb-16">
           <div className="space-y-6 md:col-span-1">
             <div className="flex items-center gap-2">
-              <div className="bg-blue-600 p-2.5 rounded-2xl text-white shadow-lg shadow-blue-100">
-                <Bird size={24} />
-              </div>
+              <div className=" p-2.5  flex items-center justify-center">
+                      <img
+                        src="/assets/2.png"
+                        alt="Little Bird Laundry Logo"
+                        className="h-14 w-14 object-contain"
+                      />
+                    </div>
+
               <h2 className="text-xl font-black text-blue-900 leading-tight tracking-tighter uppercase">Little Bird</h2>
             </div>
             <p className="text-slate-500 text-sm leading-relaxed font-medium">
