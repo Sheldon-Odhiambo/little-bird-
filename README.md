@@ -1,38 +1,42 @@
-# 🧺 Little Bird Laundry Company
+# Little Bird Laundry — Online Laundry Service
 
-Little Bird Laundry Company is a modern laundry service brand focused on providing fresh, reliable, and convenient laundry solutions for individuals and families.
-Our mission is simple: Clean clothes. Happy lives.
+Little Bird Laundry is a modern, customer-focused laundry service built for convenience, freshness, and reliability.
+We help individuals and families save time by providing professional laundry care with a simple, seamless digital experience.
 
-This project powers the Little Bird Laundry Company digital experience, combining clean design with smart functionality.
+Clean clothes.
+Fresh results.
+Handled with care.
 
-🚀 Features
+🚀 About the Service
 
-Modern and responsive UI
+Little Bird Laundry offers reliable laundry and dry-cleaning services designed to fit busy lifestyles.
+From everyday wear to delicate fabrics, we ensure every load is treated with attention, hygiene, and quality.
 
-Fast performance with Vite
+This project powers the official Little Bird Laundry online platform, providing customers with an easy way to learn about services and connect with us.
 
-Smart automation-ready features
+🛍️ Features
 
-Mobile-first experience
+Modern, responsive landing page
 
-Easy customization and scalability
+Clear service listings and navigation
 
-🛠️ Tech Stack
+Clean, minimal UI for easy use
 
-React (TSX)
+Mobile-first design for customers on the go
 
-Vite
+Fast and optimized performance
 
-Node.js
+🧑‍💻 Tech Stack
+
+React (Vite)
 
 Tailwind CSS
 
-▶️ Run and Deploy the App
+Node.js
 
-This repository contains everything you need to run the app locally and deploy it.
+Modern component-based architecture
 
-📦 Prerequisites
+⚙️ Run Locally
+Prerequisites
 
-Make sure you have the following installed:
-
-- Node.js (v18 or higher recommended)
+Node.js installed on your machine
