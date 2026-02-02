@@ -1,93 +1,118 @@
 
-import React, { useState, useMemo } from 'react';
-import { Calculator as CalcIcon, Plus, Minus, Receipt, ShoppingCart } from 'lucide-react';
+import React, { useMemo } from 'react';
+import { Calculator as CalcIcon, Plus, Minus, Receipt, ShoppingCart, MapPin, Send, Bird, CheckCircle2 } from 'lucide-react';
 import { SERVICES, BUSINESS_INFO } from '../constants';
-import { ServiceItem } from '../types';
 
-const Calculator: React.FC = () => {
-  const [counts, setCounts] = useState<{ [id: string]: number }>({});
+interface CalculatorProps {
+  counts: { [id: string]: number };
+  updateCount: (id: string, delta: number) => void;
+  address: string;
+  setAddress: (address: string) => void;
+  total: number;
+  onBooked?: () => void;
+}
 
-  const updateCount = (id: string, delta: number) => {
-    setCounts(prev => ({
-      ...prev,
-      [id]: Math.max(0, (prev[id] || 0) + delta)
-    }));
-  };
-
-  const total = useMemo(() => {
-    return (Object.entries(counts) as [string, number][]).reduce((acc, [id, count]) => {
-      const service = SERVICES.find(s => s.id === id);
-      return acc + (service ? service.price * count : 0);
-    }, 0);
-  }, [counts]);
-
+const Calculator: React.FC<CalculatorProps> = ({ counts, updateCount, address, setAddress, total, onBooked }) => {
   const activeItems = useMemo(() => {
     return (Object.entries(counts) as [string, number][]).filter(([_, count]) => count > 0);
   }, [counts]);
 
   const handleBook = () => {
+    if (activeItems.length === 0) {
+      alert("Please add at least one item to your estimate.");
+      return;
+    }
+    if (!address.trim()) {
+      alert("Please enter your pickup location so we can arrange your delivery!");
+      return;
+    }
+
     const summary = activeItems.map(([id, count]) => {
       const service = SERVICES.find(s => s.id === id);
-      return `${count}${service?.unit === 'kg' ? 'kg' : ''} x ${service?.name}`;
+      const subtotal = (service?.price || 0) * count;
+      return `• ${count}${service?.unit === 'kg' ? 'kg' : ''} x ${service?.name} (KSH ${subtotal}/=)`;
     }).join('%0A');
     
-    const message = `Hello Little Bird Laundry! 🐦%0AI would like to book a service:%0A${summary}%0AEstimated Total: ${total}/=%0APlease let me know when you can pick up!`;
+    // Professionally formatted conversational message with explicit Pickup Address and clear spacing
+    const message = `*Jambo Little Bird Laundry!* 🐦%0A%0AI'd like to book a professional cleaning service for the following items:%0A%0A*ORDER SUMMARY:*%0A${summary}%0A%0A*ESTIMATED TOTAL:* KSH ${total}/=%0A%0A*📍 PICKUP & DELIVERY ADDRESS:*%0A${encodeURIComponent(address)}%0A%0ACan you please confirm your availability for a pickup?%0A%0A_Sent via Little Bird Online Estimator_`;
+    
     window.open(`https://wa.me/${BUSINESS_INFO.whatsapp}?text=${message}`, '_blank');
+    
+    // Refresh/Reset the app state after booking trigger
+    if (onBooked) {
+      setTimeout(() => {
+        onBooked();
+      }, 500); // Slight delay to ensure the window.open triggers first
+    }
   };
 
   return (
     <section id="calculator" className="py-24 px-6 bg-slate-900 text-white rounded-[4rem] mx-4 my-12 overflow-hidden relative">
-      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 blur-3xl rounded-full" />
+      {/* Decorative Brand Element */}
+      <div className="absolute -bottom-20 -left-20 text-white/5 pointer-events-none rotate-12">
+        <Bird size={400} />
+      </div>
       
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16">
           <div className="flex justify-center mb-4">
-            <div className="bg-blue-600 p-4 rounded-2xl shadow-lg">
+            <div className="bg-blue-600 p-5 rounded-3xl shadow-2xl relative animate-in zoom-in duration-700">
               <CalcIcon size={32} />
+              <div className="absolute -top-3 -right-3 bg-white text-blue-600 p-1.5 rounded-xl shadow-xl rotate-12 scale-110 border-2 border-blue-50">
+                <Bird size={18} />
+              </div>
             </div>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Cost Estimator</h2>
-          <p className="text-slate-400 max-w-2xl mx-auto">Select your items below to get an instant estimate of your laundry bill. No hidden fees!</p>
+          <h2 className="text-4xl md:text-6xl font-black mb-4 tracking-tighter">Cost Estimator</h2>
+          <p className="text-slate-400 max-w-2xl mx-auto font-medium text-lg">Instant pricing for Nairobi's premier laundry service.</p>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-12">
-          {/* Service Grid */}
-          <div className="lg:col-span-2 space-y-8">
+          {/* Service Selection Grid */}
+          <div className="lg:col-span-2 space-y-10">
             {['washing', 'household', 'special'].map((cat) => (
-              <div key={cat} className="space-y-4">
-                <h3 className="text-sm font-bold uppercase tracking-widest text-blue-400">{cat} Services</h3>
-                <div className="grid sm:grid-cols-2 gap-4">
+              <div key={cat} className="space-y-6">
+                <div className="flex items-center gap-4">
+                  <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
+                  <h3 className="text-[11px] font-black uppercase tracking-[0.4em] text-blue-400 whitespace-nowrap">{cat} Specialties</h3>
+                  <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
+                </div>
+                
+                <div className="grid sm:grid-cols-2 gap-5">
                   {SERVICES.filter(s => s.category === cat).map((service) => (
                     <div 
                       key={service.id} 
-                      className={`group/item p-5 rounded-3xl border transition-all duration-300 cursor-pointer ${
+                      className={`group/item p-6 rounded-[2.5rem] border-2 transition-all duration-500 cursor-pointer ${
                         counts[service.id] > 0 
-                          ? 'bg-blue-600/20 border-blue-500 shadow-xl shadow-blue-900/40' 
-                          : 'bg-slate-800/50 border-slate-700 hover:border-slate-500 hover:bg-slate-800 hover:-translate-y-1'
+                          ? 'bg-blue-600/10 border-blue-500 shadow-2xl shadow-blue-900/40 scale-[1.02]' 
+                          : 'bg-slate-800/40 border-slate-700/50 hover:border-slate-500 hover:bg-slate-800/80 hover:-translate-y-1'
                       }`}
                       onClick={() => updateCount(service.id, 1)}
                     >
-                      <div className="flex justify-between items-start mb-4">
+                      <div className="flex justify-between items-start mb-6">
                         <div>
-                          <h4 className="font-bold text-lg group-hover/item:text-blue-400 transition-colors">{service.name}</h4>
-                          <p className="text-slate-400 text-sm">{service.price}/{service.unit === 'kg' ? 'kg' : 'unit'}</p>
+                          <h4 className="font-black text-xl group-hover/item:text-blue-400 transition-colors leading-tight tracking-tight">{service.name}</h4>
+                          <div className="flex items-center gap-2 mt-2">
+                             <span className="text-blue-500 font-black text-xs">{service.price}/=</span>
+                             <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">per {service.unit}</span>
+                          </div>
                         </div>
                       </div>
-                      <div className="flex items-center gap-4" onClick={(e) => e.stopPropagation()}>
+                      <div className="flex items-center gap-5" onClick={(e) => e.stopPropagation()}>
                         <button 
                           onClick={() => updateCount(service.id, -1)}
-                          className="p-2 rounded-xl bg-slate-700 hover:bg-slate-600 transition-colors"
+                          className="p-3.5 rounded-2xl bg-slate-700 hover:bg-red-500/80 transition-all active:scale-90 flex items-center justify-center"
                         >
-                          <Minus size={16} />
+                          <Minus size={18} />
                         </button>
-                        <span className="text-xl font-bold min-w-[2rem] text-center">
+                        <span className="text-2xl font-black min-w-[3rem] text-center tabular-nums">
                           {counts[service.id] || 0}
                         </span>
                         <button 
                           onClick={() => updateCount(service.id, 1)}
-                          className="p-2 rounded-xl bg-blue-600 hover:bg-blue-500 transition-colors"
+                          className="p-3.5 rounded-2xl bg-blue-600 hover:bg-blue-500 transition-all active:scale-110 shadow-lg shadow-blue-900/40 flex items-center justify-center"
                         >
-                          <Plus size={16} />
+                          <Plus size={18} />
                         </button>
                       </div>
                     </div>
@@ -97,48 +122,104 @@ const Calculator: React.FC = () => {
             ))}
           </div>
 
-          {/* Receipt Sidebar */}
+          {/* Checkout Summary Sidebar */}
           <div className="lg:col-span-1">
-            <div className="sticky top-32 glass-morphism bg-white/5 border border-white/10 p-8 rounded-[2.5rem] shadow-2xl">
-              <div className="flex items-center gap-3 mb-8 border-b border-white/10 pb-6">
-                <Receipt className="text-blue-400" />
-                <h3 className="text-2xl font-bold">Your Estimate</h3>
+            <div className="sticky top-32 bg-white/5 backdrop-blur-2xl border border-white/10 p-10 rounded-[3.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)]">
+              <div className="flex items-center justify-between mb-10 border-b border-white/10 pb-6">
+                <div className="flex items-center gap-3">
+                  <Receipt className="text-blue-400" />
+                  <h3 className="text-2xl font-black tracking-tight">Your Order</h3>
+                </div>
+                {activeItems.length > 0 && (
+                  <div className="bg-blue-600/20 text-blue-400 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">
+                    {activeItems.length} Items
+                  </div>
+                )}
               </div>
               
-              <div className="space-y-4 mb-8 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+              {/* Itemized Breakdown List */}
+              <div className="space-y-6 mb-10 max-h-[280px] overflow-y-auto pr-3 custom-scrollbar">
                 {activeItems.length === 0 ? (
-                  <p className="text-slate-400 text-center italic py-10">No items selected yet...</p>
+                  <div className="py-16 text-center space-y-4 opacity-30">
+                    <div className="bg-slate-800 w-16 h-16 rounded-3xl flex items-center justify-center mx-auto mb-4">
+                      <ShoppingCart size={32} />
+                    </div>
+                    <p className="text-slate-400 italic font-medium">Add services to generate a breakdown...</p>
+                  </div>
                 ) : (
                   activeItems.map(([id, count]) => {
                     const s = SERVICES.find(item => item.id === id);
+                    const lineTotal = (s?.price || 0) * count;
                     return (
-                      <div key={id} className="flex justify-between items-center text-sm animate-in fade-in slide-in-from-left-2">
-                        <span className="text-slate-300">
-                          {count}{s?.unit === 'kg' ? 'kg' : ''} x {s?.name}
-                        </span>
-                        <span className="font-bold">{(s?.price || 0) * count}/=</span>
+                      <div key={id} className="group animate-in fade-in slide-in-from-right-4 duration-500">
+                        <div className="flex justify-between items-start gap-4">
+                          <div className="flex items-center gap-3">
+                            <div className="p-1.5 bg-blue-500/10 rounded-lg text-blue-500">
+                              <CheckCircle2 size={14} />
+                            </div>
+                            <div className="flex flex-col">
+                              <span className="text-slate-200 font-bold text-sm leading-tight">
+                                {count}{s?.unit === 'kg' ? 'kg' : ''} x {s?.name}
+                              </span>
+                              <span className="text-[10px] text-slate-500 font-black uppercase tracking-widest mt-0.5">
+                                {s?.price}/= per {s?.unit}
+                              </span>
+                            </div>
+                          </div>
+                          <span className="font-black text-blue-400 text-sm whitespace-nowrap">KSH {lineTotal}/=</span>
+                        </div>
+                        <div className="w-full h-px bg-white/5 mt-4" />
                       </div>
                     );
                   })
                 )}
               </div>
 
-              <div className="border-t border-white/10 pt-6 space-y-6">
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-400 text-lg">Total Amount</span>
-                  <span className="text-3xl font-bold text-blue-400 transition-all duration-500">{total}/=</span>
+              {/* Enhanced Location/Address Section */}
+              <div className="mb-10 p-8 bg-blue-600/10 rounded-[2.5rem] border-2 border-blue-500/30 space-y-5 shadow-inner group-focus-within:ring-4 ring-blue-500/20 transition-all">
+                <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.25em] text-blue-400">
+                  <div className="bg-blue-600 p-2 rounded-xl text-white">
+                    <MapPin size={16} className="animate-pulse" />
+                  </div>
+                  <span>Pickup & Delivery Address</span>
+                </div>
+                <textarea 
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  placeholder="Where should we pick up? (E.g. Kilimani, Galana Rd, House No. 4B)"
+                  className="w-full bg-slate-900/80 border border-white/10 rounded-2xl p-5 text-sm text-white placeholder:text-slate-600 outline-none focus:ring-2 ring-blue-500/60 transition-all min-h-[140px] resize-none font-medium leading-relaxed shadow-lg"
+                />
+              </div>
+
+              {/* Footer Checkout Info */}
+              <div className="border-t border-white/10 pt-10 space-y-8">
+                <div className="flex justify-between items-end">
+                  <div className="flex flex-col">
+                    <span className="text-slate-400 text-[10px] font-black uppercase tracking-[0.3em] mb-2">Total Estimate</span>
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-5xl font-black text-white transition-all duration-700 tabular-nums">{total}</span>
+                      <span className="text-blue-500 font-black text-xl">/=</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-end gap-2">
+                    <div className="bg-white text-slate-900 px-4 py-2 rounded-2xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2 shadow-lg scale-90 sm:scale-100">
+                      <Bird size={14} className="text-blue-600" />
+                      <span>Luxe Approved</span>
+                    </div>
+                  </div>
                 </div>
                 
                 <button 
                   disabled={total === 0}
                   onClick={handleBook}
-                  className="w-full bg-blue-600 text-white py-5 rounded-2xl font-bold text-lg hover:bg-blue-700 transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed group shadow-xl shadow-blue-900/40"
+                  className="w-full bg-blue-600 text-white py-7 rounded-[2.5rem] font-black text-xl hover:bg-blue-500 transition-all flex items-center justify-center gap-4 disabled:opacity-20 disabled:grayscale disabled:cursor-not-allowed group shadow-[0_20px_40px_-10px_rgba(37,99,235,0.5)] active:scale-95"
                 >
-                  <ShoppingCart size={20} className="group-hover:scale-110 transition-transform" />
-                  <span>Book Pickup Now</span>
+                  <Send size={22} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                  <span>Book via WhatsApp</span>
                 </button>
-                <p className="text-[10px] text-center text-slate-500 uppercase tracking-widest font-semibold">
-                  T&Cs Apply • Price may vary based on actual weight
+                
+                <p className="text-[9px] text-center text-slate-500 uppercase tracking-[0.2em] font-black leading-relaxed">
+                  Fast Pickup • 24hr Return • Verified Care
                 </p>
               </div>
             </div>
