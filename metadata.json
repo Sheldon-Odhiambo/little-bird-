@@ -1,6 +1,5 @@
-
 {
   "name": "Little Bird Laundry",
-  "description": "A fresh, modern, and interactive web application for Little Bird Laundry services, featuring an automated cost calculator and professional care estimation.",
+  "description": "A premium laundry service application with a built-in cost estimator and WhatsApp booking integration.",
   "requestFramePermissions": []
 }
