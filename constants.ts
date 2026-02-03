@@ -24,7 +24,7 @@ export const SERVICES: ServiceItem[] = [
     price: 150, 
     unit: 'kg', 
     category: 'household',
-    image: 'https://images.unsplash.com/photo-1521503862198-2ae9a997bbc9?auto=format&fit=crop&q=80&w=800'
+    image: '/assets/curtains.jpeg'
   },
   { 
     id: 'towels_robes', 
@@ -32,7 +32,7 @@ export const SERVICES: ServiceItem[] = [
     price: 100, 
     unit: 'unit', 
     category: 'household',
-    image: 'https://images.unsplash.com/photo-1583947581924-860bda6a26df?auto=format&fit=crop&q=80&w=800'
+    image: '/assets/Towels/jpeg'
   },
   { 
     id: 'duvet_4x6', 
@@ -56,7 +56,7 @@ export const SERVICES: ServiceItem[] = [
     price: 500, 
     unit: 'unit', 
     category: 'household',
-    image: '/assets/Duvet1.jpeg'
+    image: '/assets/Duvet3.jpeg'
   },
   { 
     id: 'blankets', 
