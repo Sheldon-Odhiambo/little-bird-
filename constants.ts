@@ -32,7 +32,7 @@ export const SERVICES: ServiceItem[] = [
     price: 100, 
     unit: 'unit', 
     category: 'household',
-    image: '/assets/Towels/jpeg'
+    image: '/assets/Towels.jpeg'
   },
   { 
     id: 'duvet_4x6', 
