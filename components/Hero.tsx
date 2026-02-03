@@ -37,8 +37,8 @@ const Hero: React.FC = () => {
              </div>
              <div className="w-[1px] h-10 bg-slate-200" />
              <div className="space-y-1">
-                <div className="text-3xl font-black text-slate-900 tracking-tighter">Free</div>
-                <div className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em]">Pick & Drop</div>
+                <div className="text-3xl font-black text-slate-900 tracking-tighter">Pick & Drop</div>
+                <div className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em]">Available</div>
              </div>
           </div>
 

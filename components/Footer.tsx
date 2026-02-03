@@ -91,7 +91,7 @@ const Footer: React.FC = () => {
             <div className="flex items-center gap-1.5 text-[10px] text-blue-500 font-black uppercase tracking-[0.2em]">
               <span>Made with</span>
               <Heart size={10} className="text-red-500 fill-current animate-pulse" />
-              <span>by Sheldon Ouma</span>
+              <span>by Burny Tech</span>
             </div>
           </div>
           <div className="flex gap-8 text-[10px] text-slate-400 font-black uppercase tracking-[0.2em]">
