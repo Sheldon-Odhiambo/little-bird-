@@ -40,7 +40,7 @@ export const SERVICES: ServiceItem[] = [
     price: 400, 
     unit: 'unit', 
     category: 'household',
-    image: 'https://images.unsplash.com/photo-1629079447841-d83b1999f0c0?auto=format&fit=crop&q=80&w=800'
+    image: '/assets/Duvet1.jpeg'
   },
   { 
     id: 'duvet_5x6', 
@@ -48,7 +48,7 @@ export const SERVICES: ServiceItem[] = [
     price: 450, 
     unit: 'unit', 
     category: 'household',
-    image: 'https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&q=80&w=800'
+    image: '/assets/Duvet2.jpeg'
   },
   { 
     id: 'duvet_6x6', 
@@ -56,7 +56,7 @@ export const SERVICES: ServiceItem[] = [
     price: 500, 
     unit: 'unit', 
     category: 'household',
-    image: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?auto=format&fit=crop&q=80&w=800'
+    image: '/assets/Duvet1.jpeg'
   },
   { 
     id: 'blankets', 
@@ -64,7 +64,7 @@ export const SERVICES: ServiceItem[] = [
     price: 300, 
     unit: 'unit', 
     category: 'household',
-    image: 'https://images.unsplash.com/photo-1580302200322-299f18076637?auto=format&fit=crop&q=80&w=800'
+    image: '/assets/Blankets.jpeg'
   },
   { 
     id: 'grad_gown', 

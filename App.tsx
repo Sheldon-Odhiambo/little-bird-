@@ -6,7 +6,7 @@ import Footer from './components/Footer';
 import WaterParticles from './components/WaterParticles';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
 import { SERVICES } from './constants';
-import { Waves, Wind, ShieldCheck, Sun, ArrowRight, X, Sparkles, Bird, ShoppingBag } from 'lucide-react';
+import { Waves, Wind, ShieldCheck, Sun, ArrowRight, X, Sparkles, Bird, ShoppingBag, Cpu, Zap, Truck, Microscope } from 'lucide-react';
 import { ServiceItem } from './types';
 
 const RevealOnScroll: React.FC<{ children: React.ReactNode, delay?: number }> = ({ children, delay = 0 }) => {
@@ -63,6 +63,12 @@ const ServiceModal: React.FC<{
           <div className="h-64 md:h-full relative">
             <img src={service.image} alt={service.name} className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent" />
+            <div className="absolute bottom-4 left-4 flex gap-2">
+               <div className="bg-blue-600/90 backdrop-blur-md text-white text-[8px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                 <Cpu size={10} />
+                 AI ASSISTED
+               </div>
+            </div>
           </div>
           <div className="p-10 space-y-6">
             <div>
@@ -72,19 +78,19 @@ const ServiceModal: React.FC<{
             </div>
 
             <div className="space-y-4">
-              <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400">Process & Care</h4>
+              <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400">Smart Technology</h4>
               <p className="text-slate-600 text-sm leading-relaxed font-medium">
-                Our premium cleaning cycle for {service.name.toLowerCase()} includes multi-stage filtration and professional steaming.
+                Our AI machines analyze fabric weight and softness to automatically calibrate water levels and detergent precision, ensuring 0% wear-and-tear.
               </p>
             </div>
 
             <div className="bg-blue-50 rounded-2xl p-5 border border-blue-100">
               <div className="flex items-center gap-3 text-blue-700 mb-2">
                 <Bird size={18} />
-                <span className="text-[10px] font-black uppercase tracking-widest">Seal of Quality</span>
+                <span className="text-[10px] font-black uppercase tracking-widest">AI Sensing Cycle</span>
               </div>
               <p className="text-xs text-blue-600/80 leading-relaxed font-bold">
-                Every {service.name.toLowerCase()} is hand-inspected for a spotless finish.
+                Optimized for {service.name.toLowerCase()} using real-time soil level detection.
               </p>
             </div>
 
@@ -136,6 +142,12 @@ const AnimatedServiceCard: React.FC<{ service: ServiceItem, index: number, onSel
       <div className="absolute top-4 left-4 z-10 bg-blue-600 text-white p-2 rounded-xl shadow-lg group-hover:rotate-12 transition-transform">
         <Bird size={16} />
       </div>
+      
+      <div className="absolute top-4 left-16 z-10 bg-slate-900/80 backdrop-blur-md text-white px-3 py-1.5 rounded-xl text-[8px] font-black uppercase tracking-widest flex items-center gap-1.5 shadow-lg border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
+        <Cpu size={10} className="text-blue-400" />
+        AI Assisted
+      </div>
+
       <div className="relative h-48 sm:h-56 overflow-hidden bg-slate-50">
         <img 
           src={s.image} 
@@ -156,7 +168,7 @@ const AnimatedServiceCard: React.FC<{ service: ServiceItem, index: number, onSel
         </div>
         <h3 className="text-2xl font-black text-slate-900 mb-2 group-hover:text-blue-600 transition-colors leading-tight tracking-tight">{s.name}</h3>
         <p className="text-slate-500 text-sm leading-relaxed mb-6 font-medium opacity-80 line-clamp-2">
-          Specialized cleaning cycles tailored for maximum freshness.
+          Specialized cleaning cycles tailored with AI fabric sensing for maximum freshness.
         </p>
         <div className="flex items-center justify-between pt-5 border-t border-slate-50">
           <div className="flex items-center gap-2 text-blue-600 font-black text-[9px] uppercase tracking-widest">
@@ -208,18 +220,58 @@ const App: React.FC = () => {
       <main>
         <Hero />
 
+        {/* AI & Logistics Smart Banner */}
+        <section className="py-12 px-6">
+          <div className="max-w-7xl mx-auto">
+            <RevealOnScroll>
+              <div className="bg-slate-900 rounded-[3rem] p-8 md:p-12 overflow-hidden relative shadow-2xl border border-white/5">
+                <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
+                  <Cpu size={300} />
+                </div>
+                <div className="grid md:grid-cols-2 gap-12 items-center relative z-10">
+                  <div className="space-y-6">
+                    <div className="inline-flex items-center gap-3 px-4 py-2 bg-blue-600/20 text-blue-400 rounded-full text-[10px] font-black uppercase tracking-widest border border-blue-500/30">
+                      <Microscope size={14} />
+                      Fabric Sensing Intelligence
+                    </div>
+                    <h2 className="text-3xl md:text-5xl font-black text-white leading-tight tracking-tighter">
+                      Smart Cycles <br /> 
+                      <span className="text-blue-500">Tailored by AI.</span>
+                    </h2>
+                    <p className="text-slate-400 font-medium leading-relaxed">
+                      Our machines don't just wash; they think. By identifying fiber density and soil levels, our AI ensures the perfect pH balance and temperature for every load.
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-6">
+                    <div className="bg-white/5 backdrop-blur-md p-6 rounded-3xl border border-white/10 hover:bg-white/10 transition-colors">
+                      <Cpu className="text-blue-500 mb-4" size={24} />
+                      <h4 className="text-white font-black text-sm mb-1 uppercase tracking-widest">AI Sensing</h4>
+                      <p className="text-[10px] text-slate-500 font-bold leading-tight">Zero fabric damage technology.</p>
+                    </div>
+                    <div className="bg-white/5 backdrop-blur-md p-6 rounded-3xl border border-white/10 hover:bg-white/10 transition-colors">
+                      <Truck className="text-blue-400 mb-4" size={24} />
+                      <h4 className="text-white font-black text-sm mb-1 uppercase tracking-widest">Precision Drop</h4>
+                      <p className="text-[10px] text-slate-500 font-bold leading-tight">Real-time logistics tracking.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </RevealOnScroll>
+          </div>
+        </section>
+
         {/* Features Row */}
         <section className="py-16 px-6 relative">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
               {[
-                { icon: <Waves className="text-blue-500" />, title: "Fluid Care", desc: "Eco-gentle washing" },
-                { icon: <Wind className="text-blue-400" />, title: "Turbo Dry", desc: "Delicate air-flow" },
+                { icon: <Cpu className="text-blue-600" />, title: "AI Smart Wash", desc: "Fabric sensing tech" },
+                { icon: <Truck className="text-blue-400" />, title: "Free Pick/Drop", desc: "Logistics integrated" },
                 { icon: <ShieldCheck className="text-green-500" />, title: "QC Tested", desc: "3rd point inspection" },
                 { icon: <Sun className="text-yellow-500" />, title: "Sun Fresh", desc: "UV-sanitized finish" },
               ].map((f, i) => (
                 <RevealOnScroll key={i} delay={i * 100}>
-                  <div className="group p-8 rounded-[2rem] bg-white/80 backdrop-blur-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-500 h-full">
+                  <div className="group p-8 rounded-[2rem] bg-white/80 backdrop-blur-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-500 h-full relative overflow-hidden">
                     <div className="bg-blue-50 w-12 h-12 flex items-center justify-center rounded-2xl shadow-sm group-hover:bg-blue-600 group-hover:text-white transition-all duration-500 mb-6">
                       {React.cloneElement(f.icon as React.ReactElement<any>, { size: 24 })}
                     </div>
@@ -265,7 +317,6 @@ const App: React.FC = () => {
         />
       </main>
 
-      {/* Floating Total Bar */}
       {total > 0 && (
         <div className="fixed bottom-24 left-1/2 -translate-x-1/2 z-[90] animate-in slide-in-from-bottom-10">
           <button 
