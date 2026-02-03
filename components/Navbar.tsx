@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Bird, MessageSquare } from 'lucide-react';
 import { BUSINESS_INFO } from '../constants';

@@ -4,6 +4,8 @@ import { Sparkles, MessageCircle, Bird, ChevronRight, ShieldCheck } from 'lucide
 import { BUSINESS_INFO } from '../constants';
 
 const Hero: React.FC = () => {
+  const defaultMessage = encodeURIComponent("Jambo Little Bird Laundry! 🐦 I'm interested in your professional laundry services. How can I get started?");
+
   return (
     <section className="relative overflow-hidden pt-8 pb-16 px-6 min-h-[80vh] flex items-center mesh-gradient">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
@@ -49,7 +51,9 @@ const Hero: React.FC = () => {
               <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </button>
             <a 
-              href={`https://wa.me/${BUSINESS_INFO.whatsapp}`}
+              href={`https://wa.me/${BUSINESS_INFO.whatsapp}?text=${defaultMessage}`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-[#25D366] text-white px-10 py-5 rounded-2xl font-black text-lg flex items-center justify-center gap-3 hover:bg-[#20ba5a] transition-all shadow-xl shadow-green-100/50"
             >
               <MessageCircle size={24} fill="currentColor" />
@@ -65,7 +69,6 @@ const Hero: React.FC = () => {
               alt="Clean folded laundry" 
               className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105 brightness-90 contrast-110"
             />
-            {/* Brand Quality Overlay */}
             <div className="absolute top-8 right-8 bg-white/20 backdrop-blur-xl p-4 rounded-3xl border border-white/30 z-20 flex flex-col items-center gap-2 animate-in fade-in zoom-in duration-1000 delay-500">
                <Bird size={28} className="text-white drop-shadow-lg" />
                <div className="h-px w-8 bg-white/30" />

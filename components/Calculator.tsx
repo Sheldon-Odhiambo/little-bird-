@@ -27,28 +27,45 @@ const Calculator: React.FC<CalculatorProps> = ({ counts, updateCount, address, s
       return;
     }
 
-    const summary = activeItems.map(([id, count]) => {
+    const summaryLine = activeItems.map(([id, count]) => {
       const service = SERVICES.find(s => s.id === id);
       const subtotal = (service?.price || 0) * count;
-      return `• ${count}${service?.unit === 'kg' ? 'kg' : ''} x ${service?.name} (KSH ${subtotal}/=)`;
-    }).join('%0A');
+      const unitLabel = service?.unit === 'kg' ? 'kg' : '';
+      return `• ${count}${unitLabel} x ${service?.name} (KSH ${subtotal}/=)`;
+    }).join('\n');
     
-    // Professionally formatted conversational message with explicit Pickup Address and clear spacing
-    const message = `*Jambo Little Bird Laundry!* 🐦%0A%0AI'd like to book a professional cleaning service for the following items:%0A%0A*ORDER SUMMARY:*%0A${summary}%0A%0A*ESTIMATED TOTAL:* KSH ${total}/=%0A%0A*📍 PICKUP & DELIVERY ADDRESS:*%0A${encodeURIComponent(address)}%0A%0ACan you please confirm your availability for a pickup?%0A%0A_Sent via Little Bird Online Estimator_`;
+    // Construct the full message in a readable string first
+    const fullMessage = `*Jambo Little Bird Laundry!* 🐦
+
+I'd like to book a professional cleaning service for the following items:
+
+*ORDER SUMMARY:*
+${summaryLine}
+
+*ESTIMATED TOTAL:* KSH ${total}/=
+
+*📍 PICKUP & DELIVERY ADDRESS:*
+${address.trim()}
+
+Can you please confirm your availability for a pickup?
+
+_Sent via Little Bird Online Estimator_`;
+
+    // CRITICAL: Encode the entire message at once to prevent characters like '&' in "Wash & Fold" from breaking the URL
+    const encodedMessage = encodeURIComponent(fullMessage);
+    const whatsappUrl = `https://wa.me/${BUSINESS_INFO.whatsapp}?text=${encodedMessage}`;
     
-    window.open(`https://wa.me/${BUSINESS_INFO.whatsapp}?text=${message}`, '_blank');
+    window.open(whatsappUrl, '_blank');
     
-    // Refresh/Reset the app state after booking trigger
     if (onBooked) {
       setTimeout(() => {
         onBooked();
-      }, 500); // Slight delay to ensure the window.open triggers first
+      }, 500);
     }
   };
 
   return (
     <section id="calculator" className="py-24 px-6 bg-slate-900 text-white rounded-[4rem] mx-4 my-12 overflow-hidden relative">
-      {/* Decorative Brand Element */}
       <div className="absolute -bottom-20 -left-20 text-white/5 pointer-events-none rotate-12">
         <Bird size={400} />
       </div>
@@ -68,7 +85,6 @@ const Calculator: React.FC<CalculatorProps> = ({ counts, updateCount, address, s
         </div>
 
         <div className="grid lg:grid-cols-3 gap-12">
-          {/* Service Selection Grid */}
           <div className="lg:col-span-2 space-y-10">
             {['washing', 'household', 'special'].map((cat) => (
               <div key={cat} className="space-y-6">
@@ -122,7 +138,6 @@ const Calculator: React.FC<CalculatorProps> = ({ counts, updateCount, address, s
             ))}
           </div>
 
-          {/* Checkout Summary Sidebar */}
           <div className="lg:col-span-1">
             <div className="sticky top-32 bg-white/5 backdrop-blur-2xl border border-white/10 p-10 rounded-[3.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)]">
               <div className="flex items-center justify-between mb-10 border-b border-white/10 pb-6">
@@ -137,7 +152,6 @@ const Calculator: React.FC<CalculatorProps> = ({ counts, updateCount, address, s
                 )}
               </div>
               
-              {/* Itemized Breakdown List */}
               <div className="space-y-6 mb-10 max-h-[280px] overflow-y-auto pr-3 custom-scrollbar">
                 {activeItems.length === 0 ? (
                   <div className="py-16 text-center space-y-4 opacity-30">
@@ -175,7 +189,6 @@ const Calculator: React.FC<CalculatorProps> = ({ counts, updateCount, address, s
                 )}
               </div>
 
-              {/* Enhanced Location/Address Section */}
               <div className="mb-10 p-8 bg-blue-600/10 rounded-[2.5rem] border-2 border-blue-500/30 space-y-5 shadow-inner group-focus-within:ring-4 ring-blue-500/20 transition-all">
                 <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.25em] text-blue-400">
                   <div className="bg-blue-600 p-2 rounded-xl text-white">
@@ -191,7 +204,6 @@ const Calculator: React.FC<CalculatorProps> = ({ counts, updateCount, address, s
                 />
               </div>
 
-              {/* Footer Checkout Info */}
               <div className="border-t border-white/10 pt-10 space-y-8">
                 <div className="flex justify-between items-end">
                   <div className="flex flex-col">
