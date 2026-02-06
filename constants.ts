@@ -72,13 +72,13 @@ export const SERVICES: ServiceItem[] = [
     price: 500, 
     unit: 'unit', 
     category: 'special',
-    image: 'https://images.unsplash.com/photo-1523050853063-bd8012fbb391?auto=format&fit=crop&q=80&w=800'
+    image: '/assets/gown.jpeg'
   },
 ];
 
 export const BUSINESS_INFO: BusinessInfo = {
-  phone: '0788545164',
-  whatsapp: '254788545164',
+  phone: '0119386607',
+  whatsapp: '254119386607',
   hours: {
     weekdays: '8am - 5pm',
     saturday: '8am - 2pm',
