@@ -266,7 +266,7 @@ const App: React.FC = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
               {[
                 { icon: <Cpu className="text-blue-600" />, title: "AI Smart Wash", desc: "Fabric sensing tech" },
-                { icon: <Truck className="text-blue-400" />, title: "Free Pick/Drop", desc: "Logistics integrated" },
+                { icon: <Truck className="text-blue-400" />, title: "Pick/Drop", desc: "Fast and Reliable" },
                 { icon: <ShieldCheck className="text-green-500" />, title: "QC Tested", desc: "3rd point inspection" },
                 { icon: <Sun className="text-yellow-500" />, title: "Sun Fresh", desc: "UV-sanitized finish" },
               ].map((f, i) => (
